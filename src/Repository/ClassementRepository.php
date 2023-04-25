@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Classe;
+use App\Entity\Classement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Classe>
+ * @extends ServiceEntityRepository<Classement>
  *
- * @method Classe|null find($id, $lockMode = null, $lockVersion = null)
- * @method Classe|null findOneBy(array $criteria, array $orderBy = null)
- * @method Classe[]    findAll()
- * @method Classe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Classement|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Classement|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Classement[]    findAll()
+ * @method Classement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClasseRepository extends ServiceEntityRepository
+class ClassementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Classe::class);
+        parent::__construct($registry, Classement::class);
     }
 
-    public function save(Classe $entity, bool $flush = false): void
+    public function save(Classement $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ClasseRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Classe $entity, bool $flush = false): void
+    public function remove(Classement $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ClasseRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Classe[] Returns an array of Classe objects
+//     * @return Classement[] Returns an array of Classement objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ClasseRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Classe
+//    public function findOneBySomeField($value): ?Classement
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
