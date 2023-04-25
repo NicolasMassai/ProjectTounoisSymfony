@@ -103,4 +103,8 @@ class Stade
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->nom_stade; // Remplacer champ par une propriété "string" de l'entité
+    }
 }

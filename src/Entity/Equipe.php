@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EquipeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EquipeRepository::class)]
@@ -16,21 +18,21 @@ class Equipe
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[ORM\ManyToOne(inversedBy: 'equipe')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Matchs $matchs = null;
+ 
 
     #[ORM\OneToOne(mappedBy: 'equipe', cascade: ['persist', 'remove'])]
     private ?Stade $stade = null;
 
     #[ORM\OneToOne(mappedBy: 'equipe', cascade: ['persist', 'remove'])]
     private ?Joueur $joueur = null;
+
+    #[ORM\OneToMany(mappedBy: 'equipe', targetEntity: Matchs::class)]
+    private Collection $matchs;
+
+    public function __construct()
+    {
+        $this->matchs = new ArrayCollection();
+    }
 
    
     public function getId(): ?int
@@ -50,41 +52,9 @@ class Equipe
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
+    
 
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getMatchs(): ?Matchs
-    {
-        return $this->matchs;
-    }
-
-    public function setMatchs(?Matchs $matchs): self
-    {
-        $this->matchs = $matchs;
-
-        return $this;
-    }
 
     public function getStade(): ?Stade
     {
@@ -118,6 +88,40 @@ class Equipe
         $this->joueur = $joueur;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Matchs>
+     */
+    public function getMatchs(): Collection
+    {
+        return $this->matchs;
+    }
+
+    public function addMatch(Matchs $match): self
+    {
+        if (!$this->matchs->contains($match)) {
+            $this->matchs->add($match);
+            $match->setEquipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMatch(Matchs $match): self
+    {
+        if ($this->matchs->removeElement($match)) {
+            // set the owning side to null (unless already changed)
+            if ($match->getEquipe() === $this) {
+                $match->setEquipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(){
+        return $this->name; // Remplacer champ par une propriété "string" de l'entité
     }
 
 }

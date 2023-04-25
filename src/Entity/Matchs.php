@@ -31,16 +31,18 @@ class Matchs
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\OneToMany(mappedBy: 'matchs', targetEntity: Equipe::class)]
-    private Collection $equipe;
+ 
 
     #[ORM\ManyToOne(inversedBy: 'matchs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Stade $stade = null;
 
+    #[ORM\ManyToOne(inversedBy: 'matchs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipe $equipe = null;
+
     public function __construct()
     {
-        $this->equipe = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,36 +109,7 @@ class Matchs
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Equipe>
-     */
-    public function getEquipe(): Collection
-    {
-        return $this->equipe;
-    }
-
-    public function addEquipe(Equipe $equipe): self
-    {
-        if (!$this->equipe->contains($equipe)) {
-            $this->equipe->add($equipe);
-            $equipe->setMatchs($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEquipe(Equipe $equipe): self
-    {
-        if ($this->equipe->removeElement($equipe)) {
-            // set the owning side to null (unless already changed)
-            if ($equipe->getMatchs() === $this) {
-                $equipe->setMatchs(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function getStade(): ?Stade
     {
@@ -149,4 +122,18 @@ class Matchs
 
         return $this;
     }
+
+    public function getEquipe(): ?Equipe
+    {
+        return $this->equipe;
+    }
+
+    public function setEquipe(?Equipe $equipe): self
+    {
+        $this->equipe = $equipe;
+
+        return $this;
+    }
+
+    
 }

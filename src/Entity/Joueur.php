@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\JoueurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\JoueurRepository;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 
+#[MappedSuperclass]
+#[ORM\InheritanceType("JOINED")]
 #[ORM\Entity(repositoryClass: JoueurRepository::class)]
 class Joueur
 {
