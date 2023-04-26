@@ -39,6 +39,32 @@ class MatchsRepository extends ServiceEntityRepository
         }
     }
 
+
+
+    public function requete(int $x){
+    
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery('SELECT m FROM App\Entity\Matchs m WHERE m.id = ' . $x . '');
+    
+        $result = $query->getResult();
+        //dd($result);
+        
+        return $result;
+    }
+/*
+    public function requete2(int $x){
+    
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery('SELECT m FROM App\Entity\Stade m WHERE m.stade = ' . $x . '');
+    
+        $result = $query->getResult();
+        //dd($result);
+        
+        return $result;
+    }*/
+
 //    /**
 //     * @return Matchs[] Returns an array of Matchs objects
 //     */

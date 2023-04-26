@@ -9,14 +9,16 @@
 </style>
 
 <div class="example-wrapper">
+    {% for match in matchs %}
 
-            <li>Match : {{matchs.equipeDom}} - {{matchs.equipeExt}}</li>
-            <li>Resultat : {{matchs.ScoreDom}} - {{matchs.ScoreExt}}</li>
-            <li>Date : {{matchs.date|date('d/m/Y')}}</li>
-            <li>Nom du Stade : {{stade.nomstade}}</li>
-            <li>Localisation : {{stade.localisation}}</li>
+            <li>Match : {{match.equipeDom}} - {{match.equipeExt}}</li>
+            <li>Resultat : {{match.ScoreDom}} - {{match.ScoreExt}}</li>
+            <li>Date : {{match.date|date('d/m/Y')}}</li>
+            <li>Nom Stade : {{stade.nomstade}}</li>
+            <li>Lieu : {{stade.localisation}}</li>
+            
 
-
+    {% endfor %}
     
 </div>
 {% endblock %}

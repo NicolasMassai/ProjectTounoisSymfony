@@ -2,10 +2,8 @@
 
 namespace App\Controller\User_Online;
 
-use App\Entity\Stade;
 use App\Entity\Matchs;
 use App\Form\MatchsType;
-use Doctrine\ORM\Mapping\Id;
 use App\Repository\StadeRepository;
 use App\Repository\MatchsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,12 +44,18 @@ class MatchsController extends AbstractController
         $id2 = $matchs->getStade();
 
 
-        $matchs=$matchsrepository->find($id);
+        //$matchs=$matchsrepository->find($id);
         $stade=$staderepository->find($id2);
+        
+        
+        $match=$matchsrepository->requete($id);
+       // $stade=$staderepository->requete2($id2);
+
+
 
 
         return $this->render('matchs/getId.html.twig', [
-            'matchs' => $matchs,
+            'matchs' => $match,
             'stade' => $stade            
         ]);
     }
