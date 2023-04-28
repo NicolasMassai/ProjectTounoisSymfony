@@ -6,8 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\JoueurRepository;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 
-#[MappedSuperclass]
-#[ORM\InheritanceType("JOINED")]
+
 #[ORM\Entity(repositoryClass: JoueurRepository::class)]
 class Joueur
 {
@@ -27,8 +26,13 @@ class Joueur
 
     #[ORM\Column(length: 255)]
     private ?string $poste = null;
-
+/*
     #[ORM\OneToOne(inversedBy: 'joueur', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Equipe $equipe = null;
+*/
+    
+    #[ORM\ManyToOne(inversedBy: 'joueur')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Equipe $equipe = null;
 
@@ -116,4 +120,9 @@ class Joueur
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->nom; // Remplacer champ par une propriété "string" de l'entité
+    }
+
 }

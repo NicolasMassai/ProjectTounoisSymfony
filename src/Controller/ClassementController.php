@@ -1,18 +1,24 @@
 <?php
 
-namespace App\Controller\User_Online;
+namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\MatchsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ClassementController extends AbstractController
 {
     #[Route('/user/classement', name: 'app_classement')]
-    public function index(): Response
+    public function index(MatchsRepository $matchsrepository): Response
     {
+        $matchs = $matchsrepository->findAll();
+
+
+
         return $this->render('classement/index.html.twig', [
-            'controller_name' => 'ClassementController',
+            'matchs' => $matchs,
         ]);
     }
+
 }

@@ -23,8 +23,11 @@ class Equipe
     #[ORM\OneToOne(mappedBy: 'equipe', cascade: ['persist', 'remove'])]
     private ?Stade $stade = null;
 
-    #[ORM\OneToOne(mappedBy: 'equipe', cascade: ['persist', 'remove'])]
-    private ?Joueur $joueur = null;
+   /* #[ORM\OneToOne(mappedBy: 'equipe', cascade: ['persist', 'remove'])]
+    private ?Joueur $joueur = null;*/
+
+    #[ORM\OneToMany(mappedBy: 'equipe', targetEntity: Joueur::class)]
+    private Collection $joueur;
 
     #[ORM\OneToMany(mappedBy: 'equipe', targetEntity: Matchs::class)]
     private Collection $matchs;
@@ -73,7 +76,7 @@ class Equipe
         return $this;
     }
 
-    public function getJoueur(): ?Joueur
+    public function getJoueur(): Collection
     {
         return $this->joueur;
     }

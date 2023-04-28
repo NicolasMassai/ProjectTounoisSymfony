@@ -4,9 +4,12 @@ namespace App\Controller\User_Online;
 
 use App\Entity\Matchs;
 use App\Form\MatchsType;
+use App\Service\FirstService;
 use App\Repository\StadeRepository;
 use App\Repository\MatchsRepository;
+use PhpParser\Node\Expr\Cast\String_;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\String\ByteString;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,12 +47,10 @@ class MatchsController extends AbstractController
         $id2 = $matchs->getStade();
 
 
-        //$matchs=$matchsrepository->find($id);
         $stade=$staderepository->find($id2);
         
         
         $match=$matchsrepository->requete($id);
-       // $stade=$staderepository->requete2($id2);
 
 
 
@@ -61,25 +62,19 @@ class MatchsController extends AbstractController
     }
 
     #[Route('/user/matchs/create', name: 'app_matchs_create')]
-    public function create(Request $request): Response
-    {
-        $matchs = new Matchs();
-        $form = $this->createForm(MatchsType::class, $matchs);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($matchs);
-            $this->em->flush();
-            return $this->redirectToRoute('app_matchs');
-        }
+    public function create(FirstService $myService,Request $request): Response
 
-        return $this->render('matchs/create.html.twig', [
-            'form' => $form->createView()
-        ]);
+    {            
+        $form = $myService->create($request,new Matchs,new MatchsType,new ByteString('matchs'),new ByteString('matchs'));
+        
+        return $form;
     }
+
+
 
     #[Route('/user/matchs/update/{matchs}', name: 'app_matchs_update')]
     public function update(Matchs $matchs, Request $request): Response
-    {
+    { 
         $form = $this->createForm(MatchsType::class, $matchs);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

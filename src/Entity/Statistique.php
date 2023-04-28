@@ -63,4 +63,9 @@ class Statistique
 
         return $this;
     }
+
+    public function __toString(){
+        return $this->buteur; // Remplacer champ par une propriété "string" de l'entité
+    }
+
 }

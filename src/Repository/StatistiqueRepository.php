@@ -39,6 +39,18 @@ class StatistiqueRepository extends ServiceEntityRepository
         }
     }
 
+    public function requete2(int $x){
+    
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery('SELECT s FROM App\Entity\Statistique s WHERE s.id = ' . $x . '');
+    
+        $result = $query->getResult();
+        dd($result);
+        
+        return $result;
+    }
+
 //    /**
 //     * @return Statistique[] Returns an array of Statistique objects
 //     */

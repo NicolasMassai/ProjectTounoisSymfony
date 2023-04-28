@@ -9,8 +9,17 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Créer un Match</h1>
-    {{ form(form) }}
 
+<h1>Statistique</h1>
+    {% for joueur in joueurs %}
+<ul>
+            <li>Nom : {{joueur.nom}}</li>
+            <li>Prenom : {{joueur.prenom}}</li>
+            <li>Nombre de But : {{stat.buteur}}</li>
+            <li>Nombre de Passe D. : {{stat.passeur}}</li>
+
+                 
+    {% endfor %}
+    
 </div>
 {% endblock %}

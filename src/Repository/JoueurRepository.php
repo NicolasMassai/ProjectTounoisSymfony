@@ -39,16 +39,26 @@ class JoueurRepository extends ServiceEntityRepository
         }
     }
 
+    public function requete(int $x){
+    
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery('SELECT j FROM App\Entity\Joueur j WHERE j.id = ' . $x . '');
+    
+        $result = $query->getResult();
+        //dd($result);
+        
+        return $result;
+    }
+
 //    /**
 //     * @return Joueur[] Returns an array of Joueur objects
 //     */
-//    public function findByExampleField($value): array
+//    public function findByExampleField($id): array
 //    {
 //        return $this->createQueryBuilder('j')
-//            ->andWhere('j.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('j.id', 'ASC')
-//            ->setMaxResults(10)
+//            ->andWhere('j.id = :val')
+//            ->setParameter('val', $id)
 //            ->getQuery()
 //            ->getResult()
 //        ;

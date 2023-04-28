@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClassementController!{% endblock %}
+{% block title %}Tournois de Foot{% endblock %}
 
 {% block body %}
 <style>
@@ -8,13 +8,154 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <nav>
+        <ul>
+            <a href="{{ path('app_home') }}">← Home</a>
+        </ul>
+    </nav>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/nicol/Projects/ProjectTournoisSymfony/src/Controller/ClassementController.php'|file_link(0) }}">src/Controller/ClassementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/nicol/Projects/ProjectTournoisSymfony/templates/classement/index.html.twig'|file_link(0) }}">templates/classement/index.html.twig</a></code></li>
-    </ul>
+
+<div class="example-wrapper">
+
+<h1>Classement</h1>
+ {% set myVal = 0 %}
+
+    {% for match in matchs %}
+
+        <ul>
+     
+            {% if match.equipeDom == "Equipe2" %}
+                {% if match.ScoreDom > match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+
+                {% endif %}
+            {% endif %}
+            {% if match.equipeExt == "Equipe2" %}
+                {% if match.ScoreDom < match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+                {% endif %}
+             
+            {% endif %}
+
+             
+
+        </ul>
+    {% endfor %}
+    
+    Equipe 2 : {{myVal}} Points
+
+
+
+{% set myVal = 0 %}
+
+    {% for match in matchs %}
+
+        <ul>
+     
+            {% if match.equipeDom == "Equipe1" %}
+                {% if match.ScoreDom > match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+
+                {% endif %}
+            {% endif %}
+            {% if match.equipeExt == "Equipe1" %}
+                {% if match.ScoreDom < match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+                {% endif %}
+             
+            {% endif %}
+
+             
+
+        </ul>
+    {% endfor %}
+    
+  Equipe 1 : {{myVal}} Points
+
+    {% set myVal = 0 %}
+
+    {% for match in matchs %}
+
+        <ul>
+     
+            {% if match.equipeDom == "Equipe3" %}
+                {% if match.ScoreDom > match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+
+                {% endif %}
+            {% endif %}
+            {% if match.equipeExt == "Equipe3" %}
+                {% if match.ScoreDom < match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+                {% endif %}
+             
+            {% endif %}
+
+             
+
+        </ul>
+    {% endfor %}
+    
+  Equipe 3 : {{myVal}} Points
+
+    {% set myVal = 0 %}
+
+    {% for match in matchs %}
+
+        <ul>
+     
+            {% if match.equipeDom == "Equipe4" %}
+                {% if match.ScoreDom > match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+
+                {% endif %}
+            {% endif %}
+            {% if match.equipeExt == "Equipe4" %}
+                {% if match.ScoreDom < match.ScoreExt %}
+                    {% set myVal = myVal + 3 %}
+                {% elseif match.ScoreDom == match.ScoreExt %}
+                    {% set myVal = myVal + 1 %}
+                {% else %}
+                    {% set myVal = myVal + 0 %}
+                {% endif %}
+             
+            {% endif %}
+
+             
+
+        </ul>
+    {% endfor %}
+    
+  Equipe 4 : {{myVal}} Points
+
 </div>
 {% endblock %}
+

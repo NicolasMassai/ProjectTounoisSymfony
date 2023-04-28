@@ -52,6 +52,69 @@ class MatchsRepository extends ServiceEntityRepository
         
         return $result;
     }
+
+
+    /*
+
+    public function requete3(){
+        $em = $this->getEntityManager();
+    
+        $query = $em->createQuery("SELECT e.name,sum(case 
+        when 'e.name' = 'equipe_dom' and 'score_dom' > 'score_ext` 
+                then 3
+        when 'e.name' = 'equipe_dom' and 'score_dom' = 'score_ext'
+                then 1
+        when 'e.name' = 'equipe_dom' and 'score_dom' < 'score_ext'
+                then 0
+        when 'e.name' = 'equipe_ext' and 'score_dom' < 'score_ext' 
+                then 3
+        when 'e.name' = 'equipe_ext' and 'score_dom' = 'score_ext'
+                then 1
+        when 'e.name' = 'equipe_ext' and  'score_dom' > 'score_ext'
+                then 0
+        end) AS Points
+        FROM App\Entity\Matchs m 
+        JOIN Equipe e
+        GROUP BY e.name
+        ORDER BY Points DESC");
+    
+        $result = $query->getResult();
+        dd($result);
+        
+        return $result;
+    }
+
+
+
+
+
+    
+        /*
+        $query = $this->createQueryBuilder('m')
+        ->select ('name,sum(case 
+            when `name` = `equipe_dom` and `score_dom` > `score_ext` 
+                    then 3
+            when `name` = `equipe_dom` and `score_dom` = `score_ext`
+                    then 1 
+            when `name` = `equipe_dom` and `score_dom` < `score_ext`
+                    then 0
+            when `name` = `equipe_ext` and `score_dom` < `score_ext` 
+                    then 3
+            when `name` = `equipe_ext` and `score_dom` = `score_ext`
+                    then 1
+            when `name` = `equipe_ext` and `score_dom` > `score_ext`
+                    then 0
+            end) AS Points')
+
+        ->from ('Matchs','m')
+        ->join ('Equipe', 'e')
+        ->groupby ('name')
+        ->orderby ('Points DESC')
+        ->getQuery();
+
+            
+        return $query;
+  */
 /*
     public function requete2(int $x){
     
@@ -68,17 +131,18 @@ class MatchsRepository extends ServiceEntityRepository
 //    /**
 //     * @return Matchs[] Returns an array of Matchs objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+/*
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.score = :val')
+            ->setParameter('val', $value)
+            ->orderBy('m.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+       ;
+    }*/
 
 //    public function findOneBySomeField($value): ?Matchs
 //    {
